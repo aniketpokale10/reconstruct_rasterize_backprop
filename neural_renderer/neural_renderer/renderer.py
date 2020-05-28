@@ -9,10 +9,10 @@ import neural_renderer as nr
 
 
 class Renderer(nn.Module):
-    def __init__(self, image_size=256, anti_aliasing=True, background_color=[0,0,0],
+    def __init__(self, image_size=224, anti_aliasing=True, background_color=[0,0,0],
                  fill_back=True, camera_mode='projection',
                  K=None, R=None, t=None, dist_coeffs=None, orig_size=1024,
-                 perspective=True, viewing_angle=30, camera_direction=[0,0,1],
+                 perspective=True, viewing_angle=50, camera_direction=[0,0,1],
                  near=0.1, far=100,
                  light_intensity_ambient=0.5, light_intensity_directional=0.5,
                  light_color_ambient=[1,1,1], light_color_directional=[1,1,1],
@@ -30,6 +30,8 @@ class Renderer(nn.Module):
             self.K = K
             self.R = R
             self.t = t
+            self.viewing_angle = viewing_angle
+            self.perspective = perspective
             if isinstance(self.K, numpy.ndarray):
                 self.K = torch.cuda.FloatTensor(self.K)
             if isinstance(self.R, numpy.ndarray):
@@ -237,6 +239,8 @@ class Renderer(nn.Module):
             if orig_size is None:
                 orig_size = self.orig_size
             vertices = nr.projection(vertices, K, R, t, dist_coeffs, orig_size)
+            # if self.perspective:
+            #     vertices = nr.perspective(vertices, angle=self.viewing_angle)
 
         # rasterization
         faces = nr.vertices_to_faces(vertices, faces)

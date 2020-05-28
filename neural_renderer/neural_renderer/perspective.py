@@ -3,7 +3,7 @@ import math
 
 import torch
 
-def perspective(vertices, angle=30.):
+def perspective(vertices, angle=30):
     '''
     Compute perspective distortion from a given angle
     '''

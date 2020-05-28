@@ -3,6 +3,7 @@ import os
 
 import torch
 from skimage.io import imsave
+import numpy as np
 
 import neural_renderer.cuda.create_texture_image as create_texture_image_cuda
 
@@ -26,6 +27,7 @@ def create_texture_image(textures, texture_size_out=16):
     vertices = vertices.cuda()
     textures = textures.cuda()
     image = create_texture_image_cuda.create_texture_image(vertices, textures, image, 1e-5)
+    image = torch.ones_like(image)
     
     vertices[:, :, 0] /= (image.shape[1] - 1)
     vertices[:, :, 1] /= (image.shape[0] - 1)
@@ -38,8 +40,18 @@ def create_texture_image(textures, texture_size_out=16):
 
 
 def save_obj(filename, vertices, faces, textures=None):
-    assert vertices.ndimension() == 2
-    assert faces.ndimension() == 2
+
+    if isinstance(vertices,np.ndarray):
+        assert vertices.ndim == 2
+    else:
+        assert vertices.ndimension() == 2
+    
+    if isinstance(faces,np.ndarray):
+        assert faces.ndim == 2
+    else:
+        assert faces.ndimension() == 2
+        faces = faces.detach().cpu().numpy()
+
 
     if textures is not None:
         filename_mtl = filename[:-4] + '.mtl'
@@ -47,8 +59,7 @@ def save_obj(filename, vertices, faces, textures=None):
         material_name = 'material_1'
         texture_image, vertices_textures = create_texture_image(textures)
         imsave(filename_texture, texture_image)
-
-    faces = faces.detach().cpu().numpy()
+    
 
     with open(filename, 'w') as f:
         f.write('# %s\n' % os.path.basename(filename))

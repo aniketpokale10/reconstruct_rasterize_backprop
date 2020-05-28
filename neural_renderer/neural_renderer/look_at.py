@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 
 
-def look_at(vertices, eye, at=[0, 0, 0], up=[0, 1, 0]):
+def look_at(vertices, eye, at=[0, 0, 0], up=[0, 0, 1]):
     """
     "Look at" transformation of vertices.
     """
@@ -51,6 +51,8 @@ def look_at(vertices, eye, at=[0, 0, 0], up=[0, 1, 0]):
 
     # create rotation matrix: [bs, 3, 3]
     r = torch.cat((x_axis[:, None, :], y_axis[:, None, :], z_axis[:, None, :]), dim=1)
+
+    # print(r)
 
     # apply
     # [bs, nv, 3] -> [bs, nv, 3] -> [bs, nv, 3]

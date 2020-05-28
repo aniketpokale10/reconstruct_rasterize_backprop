@@ -8,10 +8,14 @@ def get_points_from_angles(distance, elevation, azimuth, degrees=True):
         if degrees:
             elevation = math.radians(elevation)
             azimuth = math.radians(azimuth)
+        # return (
+        #     distance * math.cos(elevation) * math.sin(azimuth),
+        #     distance * math.sin(elevation),
+        #     -distance * math.cos(elevation) * math.cos(azimuth))
         return (
-            distance * math.cos(elevation) * math.sin(azimuth),
-            distance * math.sin(elevation),
-            -distance * math.cos(elevation) * math.cos(azimuth))
+            distance * math.cos(azimuth) * math.cos(elevation),
+            distance * math.sin(azimuth) * math.cos(elevation),
+            distance * math.sin(elevation))
     else:
         if degrees:
             elevation = math.pi/180. * elevation
