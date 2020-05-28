@@ -1,0 +1,24 @@
+total_frames: 300
+height: 1.24944   
+originChairId: 0 
+starting_frame: 0
+dataset: "multi_chair6"
+data_path: "data"
+model_path: "data/models"
+pose_path: "data/poses"
+
+chairs:
+  chair1:
+    bbox: [82, 129, 45, 68]
+    az: 80
+    el: 3.261
+    chair_init_frame: 0
+    ref_image: "chair1_frame1_mask.png"
+    obj_file: onet_chair_scaled.obj""
+  chair2:
+    bbox: [175, 129, 42, 62]
+    az: 78.820 
+    el: 4.112
+    chair_init_frame: 0
+    ref_image: "chair2_frame1_mask.png"
+    obj_file: "test_multi_only_chair2_for_onet3_170_scaled.obj"
