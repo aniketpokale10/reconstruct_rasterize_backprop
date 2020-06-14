@@ -52,6 +52,16 @@ We further extend our results to an offline setup where we demonstrate object-ce
 If you find our code or paper useful please consider citing
 
 ```
+@InProceedings{Pokale_2020_CVPR_Workshops,
+	author = {Pokale, Aniket and Aggarwal, Aditya and Murthy Jatavallabhula, Krishna and Krishna, Madhava},
+	title = {Reconstruct, Rasterize and Backprop: Dense Shape and Pose Estimation From a Single Image},
+	booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+	month = {June},
+	year = {2020}
+}
+```
+
+```
 @inproceedings{Occupancy Networks,
 	title = {Occupancy Networks: Learning 3D Reconstruction in Function Space},
 	author = {Mescheder, Lars and Oechsle, Michael and Niemeyer, Michael and Nowozin, Sebastian and Geiger, Andreas},
